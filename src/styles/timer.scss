@@ -1,18 +1,45 @@
-.timer {
+// .timer {
+//     text-align: center;
+
+//     h1 {
+//         font-size: 24px;
+//         font-weight: bold;
+//         margin-bottom: 16px;
+//     }
+
+//     .timer-display {
+//         font-size: 48px;
+//         font-weight: bold;
+//     }
+
+//     &.finished {
+//         background-image: url('new-background-image-url');
+//     }
+// }
+
+
+.stop-watch {
+    font-size: 6rem;
+    margin-right: 1rem;
+}
+
+label {
+    margin-bottom: 0.5rem;
+}
+
+input {
+    width: 100px;
+    margin-right: 1rem;
+    color: #282c34;
+    outline: none;
+    border: none;
+    font-size: 4.5rem;
+    font-weight: 600;
     text-align: center;
+    padding: 0rem 0.5rem;
+    border-radius: 5px;
+}
 
-    h1 {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 16px;
-    }
-
-    .timer-display {
-        font-size: 48px;
-        font-weight: bold;
-    }
-
-    &.finished {
-        background-image: url('new-background-image-url');
-    }
+input:hover {
+    background-color: #928f8f;
 }

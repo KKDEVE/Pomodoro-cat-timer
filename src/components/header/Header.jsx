@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import CountdownTimer from '../CountdownTimer';
 
 const header = () => {
     const backgroundImage1 = 'public/1.webp';
@@ -16,7 +17,10 @@ const header = () => {
 
 
     return (
-        <div className='header' onClick={() => handleChangeBg()} style={{ backgroundImage: `url(${bgImg})` }}>header</div>
+        <>
+            <div className='header' onClick={() => handleChangeBg()} style={{ backgroundImage: `url(${bgImg})` }}>header</div>
+
+        </>
     )
 }
 

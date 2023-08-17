@@ -1,52 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import firebase from 'firebase/compat/app';
-import 'firebase/firestore';
+import React from "react";
+// import styled from "styled-components";
 
+// const TimerWrapper = styled.div`
+//   margin-top: 30vh;
+//   width: 600px;
+//   margin-left: auto;
+//   margin-right: auto;
+//   background-color: #222;
+//   color: #eee;
+//   border-radius: 5px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.4);
+//   padding: 1rem 0;
 
-const Timer = () => {
-    const [seconds, setSeconds] = useState(0);
-    const [finished, setFinished] = useState(false);
+//   .stop-watch {
+//     font-size: 6rem;
+//     margin-right: 1rem;
+//   }
+//   label {
+//     margin-bottom: 0.5rem;
+//   }
+//   input {
+//     width: 100px;
+//     margin-right: 1rem;
+//     color: #282c34;
+//     outline: none;
+//     border: none;
+//     font-size: 4.5rem;
+//     font-weight: 600;
+//     text-align: center;
+//     padding: 0rem 0.5rem;
+//     border-radius: 5px;
+//   }
+//   input:hover {
+//     background-color: #928f8f;
+//   }
+// `;
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setSeconds((prevSeconds) => prevSeconds + 1);
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    useEffect(() => {
-        if (seconds >= 10) {
-            setFinished(true);
-            updateBackgroundImage();
-        }
-    }, [seconds]);
-
-    const updateBackgroundImage = async () => {
-        const db = firebase.firestore();
-        const docRef = db.collection('background').doc('image');
-
-        try {
-            await docRef.update({ imageUrl: 'new-background-image-url' });
-        } catch (error) {
-            console.log('Error updating background image:', error);
-        }
-    };
-
-    const formatTime = (time) => {
-        const minutes = Math.floor(time / 60)
-            .toString()
-            .padStart(2, '0');
-        const remainingSeconds = (time % 60).toString().padStart(2, '0');
-        return `${minutes}:${remainingSeconds}`;
-    };
-
+export default function Timer({
+    minutes,
+    changeMinutes,
+    bgUrl
+}) {
     return (
-        <div className={`timer ${finished && 'finished'}`}>
-            <h1>Timer</h1>
-            <div className="timer-display">{formatTime(seconds)}</div>
-        </div>
-    );
-};
+        // <TimerWrapper>
+        <>
+            <button className="stop-watch " > </button>
 
-export default Timer;
+            <div className="d-flex flex-column">
+                <label>mm</label>
+                <input value={minutes} onChange={changeMinutes}
+                />
+            </div>
+
+        </>
+        // </TimerWrapper>
+    );
+}
