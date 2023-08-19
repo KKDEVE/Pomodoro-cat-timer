@@ -1,17 +1,16 @@
 import React, { useContext, useState } from "react";
-
 import TextareaAutosize from "react-textarea-autosize";
-import { DeleteOutline } from "@material-ui/icons";
 import { Draggable } from "react-beautiful-dnd";
 
-// import storeApi from "../../utils/storeApi";
+import storeApi from "../../utils/storeApi";
 
 import "./styles.scss";
+import { DeleteOutline } from "@mui/icons-material";
 
 export default function Card({ card, index, listId }) {
     const [open, setOpen] = useState(false);
     const [newTitle, setNewTitle] = useState(card.title);
-    //   const { removeCard, updateCardTitle } = useContext(storeApi);
+    const { removeCard, updateCardTitle } = useContext(storeApi);
 
     const handleOnBlur = (cardId) => {
         updateCardTitle(newTitle, index, listId);

@@ -16,9 +16,9 @@ import {
     query,
     updateDoc,
 } from "firebase/firestore";
-import InputContainer from "../components/InputContainer/InputContainer";
-import List from "../components/List/List";
-import InputCard from "../components/InputCard/InputCard";
+
+import InputContainer from "../components/InputContainer";
+import List from "../components/List";
 
 
 export default function Home() {
@@ -180,7 +180,6 @@ export default function Home() {
         }
     };
     return (
-
         <StoreApi.Provider
             value={{
                 addMoreCard,
@@ -192,7 +191,10 @@ export default function Home() {
             }}
         >
             <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="app" type="list" direction="horizontal">
+                <Droppable droppableId="app" type="list"
+
+                    direction="vertical"
+                >
                     {(provided) => (
                         <div
                             className="wrapper"
