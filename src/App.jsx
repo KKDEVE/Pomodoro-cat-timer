@@ -7,7 +7,6 @@ import Header from "/src/components/header/Header";
 function App() {
   return <div>
     <Header />
-    <Timer />
     <CountdownTimer />
     <Home />
   </div>;

@@ -6,8 +6,14 @@ import storeApi from "../../utils/storeApi";
 
 import "./styles.scss";
 import { DeleteOutline } from "@mui/icons-material";
+import CountdownTimer from "../CountdownTimer";
+import Timer from "../Timer";
 
-export default function Card({ card, index, listId }) {
+
+export default function Card({ card, index, listId, seconds,
+}) {
+
+
     const [open, setOpen] = useState(false);
     const [newTitle, setNewTitle] = useState(card.title);
     const { removeCard, updateCardTitle } = useContext(storeApi);
@@ -16,6 +22,7 @@ export default function Card({ card, index, listId }) {
         updateCardTitle(newTitle, index, listId);
         setOpen(!open);
     };
+
 
     return (
         <Draggable draggableId={card.id} index={index}>
@@ -57,6 +64,7 @@ export default function Card({ card, index, listId }) {
                             </div>
                         )}
                     </div>
+                    <CountdownTimer />
                 </div>
             )}
         </Draggable>

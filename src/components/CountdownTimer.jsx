@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Timer from "./Timer";
+// import "../styles/timer.scss"
 
 const CountdownTimer = () => {
+    const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [isRunning, setIsRunning] = useState(null);
     const [showEndScreen, setShowEndScreen] = useState({
@@ -25,24 +27,27 @@ const CountdownTimer = () => {
         let interval;
         if (isRunning) {
             interval = setInterval(() => {
-                if (minutes > 0) {
+                if (seconds > 0) {
+                    setSeconds((seconds) => seconds - 1);
+                } else if (minutes > 0) {
                     setMinutes((minutes) => minutes - 1);
+                    setSeconds(59);
                 }
-            }, 6000);
+            }, 1000);
         }
 
-        if (minutes === 0) {
+        if (minutes === 0 && seconds === 0) {
             setShowEndScreen({ ...showEndScreen, show: true });
             resetTimer();
         }
         return () => clearInterval(interval);
-    }, [minutes, isRunning, showEndScreen.show]);
+    }, [seconds, minutes, isRunning, showEndScreen.show]);
 
     // Start Pause & Stop functions
 
     // Start
     function startTimer() {
-        if (minutes !== 0) {
+        if (minutes !== 0 || seconds !== 0) {
             setIsRunning(true);
             setShowEndScreen({ ...showEndScreen, show: false });
         } else {
@@ -64,11 +69,17 @@ const CountdownTimer = () => {
 
     function resetTimer() {
         setIsRunning(false);
+        setSeconds(0);
         setMinutes(0);
     }
 
     // Handlers
+    const changeSeconds = (e) => {
+        event.preventDefault
+        setSeconds(e.target.value);
+    };
     const changeMinutes = (e) => {
+        event.preventDefault
         setMinutes(e.target.value);
     };
 
@@ -79,7 +90,9 @@ const CountdownTimer = () => {
                 <h1 className="title  text-light" >{showEndScreen.message}</h1>
             )}
             <Timer
+                seconds={seconds}
                 minutes={minutes}
+                changeSeconds={changeSeconds}
                 changeMinutes={changeMinutes}
             />
             <br />

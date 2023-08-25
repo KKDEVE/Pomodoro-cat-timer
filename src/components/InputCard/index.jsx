@@ -32,7 +32,7 @@ export default function InputCard({ setOpen, listId, type }) {
                     className="input-text"
                     placeholder={
                         type === "card"
-                            ? "Enter a title of this card..."
+                            ? "Enter card title"
                             : "Enter list title"
                     }
                     autoFocus
