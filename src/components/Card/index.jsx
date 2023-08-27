@@ -64,7 +64,10 @@ export default function Card({ card, index, listId, seconds,
                             </div>
                         )}
                     </div>
+
+
                     <CountdownTimer />
+
                 </div>
             )}
         </Draggable>
