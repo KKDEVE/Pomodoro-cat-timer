@@ -1,15 +1,23 @@
+import React, { useState } from "react";
 import Home from "./Home";
-import CountdownTimer from "./components/CountdownTimer";
-
-import Timer from "/src/components/Timer";
 import Header from "/src/components/header/Header";
+import Hero from "./components/Hero";
+
+import CountdownTimer from "./components/CountdownTimer";
+// import Timer from "./components/Timer";
 
 function App() {
-  return <div>
-    <Header />
-    <CountdownTimer />
-    <Home />
-  </div>;
+
+
+  return (
+    <>
+      <CountdownTimer />
+      <Header />
+      <Hero />
+      <Home />
+    </>
+
+  )
 }
 
 export default App;

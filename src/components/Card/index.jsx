@@ -6,8 +6,6 @@ import storeApi from "../../utils/storeApi";
 
 import "./styles.scss";
 import { DeleteOutline } from "@mui/icons-material";
-import CountdownTimer from "../CountdownTimer";
-import Timer from "../Timer";
 
 
 export default function Card({ card, index, listId, seconds,
@@ -64,7 +62,7 @@ export default function Card({ card, index, listId, seconds,
                             </div>
                         )}
                     </div>
-                    <CountdownTimer />
+
                 </div>
             )}
         </Draggable>
