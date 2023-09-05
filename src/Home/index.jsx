@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-
 import StoreApi from "../utils/storeApi";
 import "./styles.scss";
 import { db, timestamp } from "../firebase";
