@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Timer from "./Timer";
+import dayjs from 'dayjs';
 // import "../styles/timer.scss"
 
 const CountdownTimer = () => {
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [isRunning, setIsRunning] = useState(null);
-    const [showEndScreen, setShowEndScreen] = useState({
-        show: false,
-        message: "public/1.webp",
-    });
 
-    const backgroundImage1 = 'public/1.webp';
-    const backgroundImage2 = 'public/2.gif';
-    const [bgImg, setBgImg] = useState(backgroundImage1)
 
-    const handleChangeBg = () => {
-        if (bgImg === backgroundImage1) {
-            setBgImg(backgroundImage2);
-        } else {
-            setBgImg(backgroundImage1);
-        }
-    }
+    const handleTimeChange = (time) => {
+        const selectedTime = dayjs(time).format('mm:ss');
+        const [selectedMinutes, selectedSeconds] = selectedTime.split(':');
+
+        setMinutes(Number(selectedMinutes));
+        setSeconds(Number(selectedSeconds));
+    };
 
     useEffect(() => {
         let interval;
@@ -37,11 +31,10 @@ const CountdownTimer = () => {
         }
 
         if (minutes === 0 && seconds === 0) {
-            setShowEndScreen({ ...showEndScreen, show: true });
             resetTimer();
         }
         return () => clearInterval(interval);
-    }, [seconds, minutes, isRunning, showEndScreen.show]);
+    }, [seconds, minutes, isRunning]);
 
     // Start Pause & Stop functions
 
@@ -49,14 +42,8 @@ const CountdownTimer = () => {
     function startTimer() {
         if (minutes !== 0 || seconds !== 0) {
             setIsRunning(true);
-            setShowEndScreen({ ...showEndScreen, show: false });
         } else {
             window.alert("Please Add Time.");
-        }
-        if (bgImg === backgroundImage1) {
-            setBgImg(backgroundImage2);
-        } else {
-            setBgImg(backgroundImage1);
         }
     }
 
@@ -64,7 +51,6 @@ const CountdownTimer = () => {
 
     function stopTimer() {
         resetTimer();
-        setShowEndScreen({ ...showEndScreen, show: false });
     }
 
     function resetTimer() {
@@ -74,28 +60,30 @@ const CountdownTimer = () => {
     }
 
     // Handlers
-    const changeSeconds = (e) => {
-        event.preventDefault
-        setSeconds(e.target.value);
-    };
-    const changeMinutes = (e) => {
-        event.preventDefault
-        setMinutes(e.target.value);
-    };
+    // const changeSeconds = (e) => {
+    //     event.preventDefault
+    //     setSeconds(e.target.value);
+    // };
+    // const changeMinutes = (e) => {
+    //     event.preventDefault
+    //     setMinutes(e.target.value);
+    // };
 
     return (
 
-        <div style={{ backgroundImage: `url(${bgImg})` }}>
-            {showEndScreen.show && (
-                <h1 className="title  text-light" >{showEndScreen.message}</h1>
-            )}
+        <div>
+
             <Timer
                 seconds={seconds}
                 minutes={minutes}
-                changeSeconds={changeSeconds}
-                changeMinutes={changeMinutes}
+                // changeSeconds={changeSeconds}
+                // changeMinutes={changeMinutes}
+                handleTimeChange={handleTimeChange}
             />
             <br />
+
+
+
             {!isRunning && (
                 <button className="btn btn-accept btn-lg" onClick={startTimer}>
                     start
