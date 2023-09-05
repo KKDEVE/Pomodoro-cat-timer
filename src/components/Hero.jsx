@@ -6,7 +6,7 @@ const Hero = () => {
     return (
         <div className="hero">
             <div className="display">
-                {minutes}
+                {minutes}:{seconds}
             </div>
         </div>
 

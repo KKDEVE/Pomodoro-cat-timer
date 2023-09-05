@@ -51,23 +51,33 @@ const CountdownTimer = () => {
     }
     return (
         <div>
-            <timerContext.Provider>
+            <timerContext.Provider value={{
+                seconds: seconds,
+                setSeconds,
+                minutes: minutes,
+                setMinutes,
+                isRunning,
+                setIsRunning
+            }}>
                 <Timer
                     seconds={seconds}
                     minutes={minutes}
                     handleTimeChange={handleTimeChange}
                 />
-            </timerContext.Provider>
-            <br />
-            {!isRunning && (
-                <button className="btn btn-accept btn-lg" onClick={startTimer}>
-                    start
+
+                <br />
+                {
+                    !isRunning && (
+                        <button className="btn btn-accept btn-lg" onClick={startTimer}>
+                            start
+                        </button>
+                    )
+                }
+                <button className="btn btn-danger btn-lg" onClick={stopTimer}>
+                    stop
                 </button>
-            )}
-            <button className="btn btn-danger btn-lg" onClick={stopTimer}>
-                stop
-            </button>
-        </div>
+            </timerContext.Provider>
+        </div >
     );
 }
 
