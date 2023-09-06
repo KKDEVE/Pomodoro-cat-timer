@@ -62,6 +62,8 @@ const CountdownTimer = () => {
                 <Timer
                     seconds={seconds}
                     minutes={minutes}
+                    setSeconds={setSeconds}
+                    setMinutes={setMinutes}
                     handleTimeChange={handleTimeChange}
                 />
 
