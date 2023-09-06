@@ -8,6 +8,7 @@ const CountdownTimer = () => {
     // const [seconds, setSeconds] = useState(0);
     // const [minutes, setMinutes] = useState(0);
     // const [isRunning, setIsRunning] = useState(null);
+    const { seconds, setSeconds, minutes, setMinutes, isRunning, setIsRunning } = useTimer()
     const handleTimeChange = (time) => {
         const selectedTime = dayjs(time).format('mm:ss');
         const [selectedMinutes, selectedSeconds] = selectedTime.split(':');
@@ -15,7 +16,7 @@ const CountdownTimer = () => {
         setMinutes(Number(selectedMinutes));
         setSeconds(Number(selectedSeconds));
     };
-    const { seconds, setSeconds, minutes, setMinutes, isRunning, setIsRunning } = useTimer()
+
 
     useEffect(() => {
         let interval;

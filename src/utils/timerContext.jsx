@@ -12,6 +12,7 @@
 // export default timerContext;
 
 import { createContext, useContext, useState } from "react";
+import { Children } from "react";
 
 const TimerContext = createContext();
 
@@ -19,21 +20,23 @@ function TimerProvider({ children }) {
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [isRunning, setIsRunning] = useState(null);
-
-    <TimerContext.Provider
-        value={{
-            seconds,
-            setSeconds,
-            minutes,
-            setMinutes,
-            isRunning,
-            setIsRunning
-        }}
-    >
-        {children}
-    </TimerContext.Provider>
+    return (
 
 
+        <TimerContext.Provider
+            value={{
+                seconds,
+                setSeconds,
+                minutes,
+                setMinutes,
+                isRunning,
+                setIsRunning
+            }}
+        >
+            {children}
+        </TimerContext.Provider>
+
+    )
 }
 function useTimer() {
     const context = useContext(TimerContext)
