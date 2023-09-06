@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import Timer from "./Timer";
 import dayjs from 'dayjs';
 // import "../styles/timer.scss"
-import timerContext from "../utils/timerContext";
+import { useTimer } from "../utils/timerContext";
+
 const CountdownTimer = () => {
-    const [seconds, setSeconds] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [isRunning, setIsRunning] = useState(null);
+    // const [seconds, setSeconds] = useState(0);
+    // const [minutes, setMinutes] = useState(0);
+    // const [isRunning, setIsRunning] = useState(null);
     const handleTimeChange = (time) => {
         const selectedTime = dayjs(time).format('mm:ss');
         const [selectedMinutes, selectedSeconds] = selectedTime.split(':');
@@ -14,6 +15,7 @@ const CountdownTimer = () => {
         setMinutes(Number(selectedMinutes));
         setSeconds(Number(selectedSeconds));
     };
+    const { seconds, setSeconds, minutes, setMinutes, isRunning, setIsRunning } = useTimer()
 
     useEffect(() => {
         let interval;
@@ -51,34 +53,26 @@ const CountdownTimer = () => {
     }
     return (
         <div>
-            <timerContext.Provider value={{
-                seconds: seconds,
-                setSeconds,
-                minutes: minutes,
-                setMinutes,
-                isRunning,
-                setIsRunning
-            }}>
-                <Timer
-                    seconds={seconds}
-                    minutes={minutes}
-                    setSeconds={setSeconds}
-                    setMinutes={setMinutes}
-                    handleTimeChange={handleTimeChange}
-                />
 
-                <br />
-                {
-                    !isRunning && (
-                        <button className="btn btn-accept btn-lg" onClick={startTimer}>
-                            start
-                        </button>
-                    )
-                }
-                <button className="btn btn-danger btn-lg" onClick={stopTimer}>
-                    stop
-                </button>
-            </timerContext.Provider>
+            <Timer
+                seconds={seconds}
+                minutes={minutes}
+                setSeconds={setSeconds}
+                setMinutes={setMinutes}
+                handleTimeChange={handleTimeChange}
+            />
+
+            <br />
+            {
+                !isRunning && (
+                    <button className="btn btn-accept btn-lg" onClick={startTimer}>
+                        start
+                    </button>
+                )
+            }
+            <button className="btn btn-danger btn-lg" onClick={stopTimer}>
+                stop
+            </button>
         </div >
     );
 }

@@ -1,15 +1,16 @@
 import Home from "./Home";
-import CountdownTimer from "./components/CountdownTimer";
 import Hero from "./components/Hero";
-
-import Timer from "/src/components/Timer";
 import Header from "/src/components/header/Header";
+import { TimerProvider, useTimer } from "./utils/timerContext";
 
 function App() {
   return <div>
-    <Header />
-    <Hero />
-    <Home />
+    <TimerProvider>
+      <Header />
+      <Hero />
+      <Home />
+    </TimerProvider>
+
   </div>;
 }
 
