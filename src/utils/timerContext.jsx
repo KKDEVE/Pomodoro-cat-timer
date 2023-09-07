@@ -35,12 +35,10 @@ function TimerProvider({ children }) {
         >
             {children}
         </TimerContext.Provider>
-
     )
 }
 function useTimer() {
     const context = useContext(TimerContext)
-
     if (context === undefined) throw new Error("TimerContext was used outside of TimerProvider")
     return context;
 }
