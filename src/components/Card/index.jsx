@@ -6,14 +6,40 @@ import storeApi from "../../utils/storeApi";
 
 import "./styles.scss";
 import { DeleteOutline } from "@mui/icons-material";
-import CountdownTimer from "../CountdownTimer";
+import { CountdownTimer } from "../CountdownTimer";
 // import Timer from "../Timer";
 
 
-export default function Card({ card, index, listId, seconds,
-}) {
+// <div >
+//     <>
+//         <LocalizationProvider dateAdapter={AdapterDayjs}>
+//             <TimePicker
+//                 onChange={handleTimeChange}
+//                 views={['minutes', 'seconds']}
+//                 format="mm:ss"
+//             />
+//         </LocalizationProvider>
+//         {
+//             timerId === activeTask &&
+//             <div className="display">
+//                 <p>
+//                     {minutes.toString().padStart(2, "0")}:
+//                     {seconds.toString().padStart(2, "0")}
+//                 </p>
+//             </div>
+//         }
+//     </>
+//     {!isRunning && (
+//         <button className="btn btn-accept btn-lg" onClick={() => startTimer(timerId)}>
+//             start
+//         </button>
+//     )}
+//     <button className="btn btn-danger btn-lg" onClick={stopTimer}>
+//         stop
+//     </button>
+// </div >
 
-
+export default function Card({ card, index, listId, }) {
     const [open, setOpen] = useState(false);
     const [newTitle, setNewTitle] = useState(card.title);
     const { removeCard, updateCardTitle } = useContext(storeApi);
@@ -22,7 +48,6 @@ export default function Card({ card, index, listId, seconds,
         updateCardTitle(newTitle, index, listId);
         setOpen(!open);
     };
-
 
     return (
         <Draggable draggableId={card.id} index={index}>
@@ -64,9 +89,7 @@ export default function Card({ card, index, listId, seconds,
                             </div>
                         )}
                     </div>
-
-
-                    <CountdownTimer />
+                    <CountdownTimer timerId={card.id} />
 
                 </div>
             )}

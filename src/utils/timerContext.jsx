@@ -1,16 +1,3 @@
-// import React from 'react';
-
-// const timerContext = React.createContext({
-//     seconds: 0,
-//     setSeconds: () => { },
-//     minutes: 0,
-//     setMinutes: () => { },
-//     isRunning: null,
-//     setIsRunning: () => { },
-// });
-
-// export default timerContext;
-
 import { createContext, useContext, useState, useEffect } from "react";
 import { Children } from "react";
 import dayjs from 'dayjs';
@@ -21,6 +8,7 @@ function TimerProvider({ children }) {
     const [seconds, setSeconds] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [isRunning, setIsRunning] = useState(null);
+    const [activeTask, setActiveTask] = useState()
 
     const handleTimeChange = (time) => {
         const selectedTime = dayjs(time).format('mm:ss');
@@ -29,8 +17,6 @@ function TimerProvider({ children }) {
         setMinutes(Number(selectedMinutes));
         setSeconds(Number(selectedSeconds));
     };
-
-
     useEffect(() => {
         let interval;
         if (isRunning) {
@@ -50,9 +36,11 @@ function TimerProvider({ children }) {
         return () => clearInterval(interval);
     }, [seconds, minutes, isRunning]);
 
-    function startTimer() {
-        if (minutes !== 0 || seconds !== 0) {
+    function startTimer(activeTask) {
+        if (minutes !== 0 || seconds !== 0 && activeTask === timerId) {
             setIsRunning(true);
+            setActiveTask(activeTask)
+
         } else {
             window.alert("Please Add Time.");
         }
@@ -69,7 +57,7 @@ function TimerProvider({ children }) {
     return (
         <TimerContext.Provider
             value={{
-                seconds, setSeconds, minutes, setMinutes, isRunning, setIsRunning, handleTimeChange, startTimer, stopTimer
+                seconds, setSeconds, minutes, setMinutes, isRunning, setIsRunning, handleTimeChange, startTimer, stopTimer, activeTask, setActiveTask
             }}
         >
             {children}

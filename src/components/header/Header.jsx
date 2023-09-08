@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import CountdownTimer from '../CountdownTimer';
 
 const header = () => {
     // const backgroundImage1 = 'public/1.webp';
