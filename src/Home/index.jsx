@@ -20,8 +20,9 @@ import InputContainer from "../components/InputContainer";
 import List from "../components/List";
 
 
-export default function Home() {
+export default function Home({ showTodo }) {
     const [lists, setLists] = useState([]);
+    // const [showTodo, setShowTodo] = useState(false);
 
     useEffect(() => {
         const q = query(collection(db, "lists"), orderBy("timestamp", "asc"));
@@ -178,39 +179,44 @@ export default function Home() {
             });
         }
     };
+    // const handleOpenTodo = () => {
+    //     setShowTodo(!showTodo);
+    // };
     return (
-        <StoreApi.Provider
-            value={{
-                addMoreCard,
-                addMoreList,
-                updateListTitle,
-                removeCard,
-                updateCardTitle,
-                deleteList,
-            }}
-        >
-            <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="app" type="list"
-
-                    direction="vertical"
+        <>
+            {showTodo &&
+                <StoreApi.Provider
+                    value={{
+                        addMoreCard,
+                        addMoreList,
+                        updateListTitle,
+                        removeCard,
+                        updateCardTitle,
+                        deleteList,
+                    }}
                 >
-                    {(provided) => (
-                        <div
-                            className="wrapper"
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                        >
-                            {lists.map((list, index) => {
-                                return <List list={list} key={list.id} index={index} />;
-                            })}
-                            <div>
-                                <InputContainer type="list" />
-                            </div>
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
-        </StoreApi.Provider>
+                    <DragDropContext onDragEnd={onDragEnd}>
+                        <Droppable droppableId="app" type="list" direction="vertical">
+                            {(provided) => (
+                                <div
+                                    className="wrapper"
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                >
+                                    {lists.map((list, index) => {
+                                        return <List list={list} key={list.id} index={index} />;
+                                    })}
+                                    <div>
+                                        <InputContainer type="list" />
+                                    </div>
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
+                    </DragDropContext>
+                </StoreApi.Provider >
+
+            }
+        </>
     );
 }

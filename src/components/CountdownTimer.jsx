@@ -24,11 +24,9 @@ export const CountdownTimer = ({ timerId }) => {
                     format="mm:ss"
                 />
             </LocalizationProvider>
-            {!isRunning && (
-                <button className="btn btn-accept btn-lg" onClick={() => startTimer(timerId)}>
-                    start
-                </button>
-            )}
+            <button className="btn btn-accept btn-lg" onClick={() => startTimer(timerId)}>
+                start
+            </button>
             <button className="btn btn-danger btn-lg" onClick={stopTimer}>
                 stop
             </button>
@@ -39,7 +37,17 @@ export const CountdownTimer = ({ timerId }) => {
 
 
 export const Timer = () => {
-    const { seconds, setSeconds, minutes, setMinutes, isRunning, setIsRunning, handleTimeChange, startTimer, stopTimer, activeTask, setActiveTask } = useTimer()
+    const { seconds, setSeconds, minutes, setMinutes, isRunning, setIsRunning, handleTimeChange, startTimer, stopTimer, activeTask, setActiveTask,
+        elapsedMinutes, setElapsedMinutes,
+        allElapsedMinutes, setAllElapsedMinutes
+    } = useTimer()
+    // const [elapsedMinutes, setElapsedMinutes] = useState(0);
+
+    // useEffect(() => {
+    //     if (isRunning && seconds === 0) {
+    //         setElapsedMinutes((prevMinutes) => prevMinutes + 1);
+    //     }
+    // }, [seconds, isRunning]);
     return (
         <div >
             {
@@ -48,6 +56,7 @@ export const Timer = () => {
                         {minutes.toString().padStart(2, "0")}:
                         {seconds.toString().padStart(2, "0")}
                     </p>
+                    <p>Minutes finished: {allElapsedMinutes[activeTask]} points</p>
                 </div>
             }
         </div >

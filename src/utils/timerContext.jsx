@@ -9,6 +9,8 @@ function TimerProvider({ children }) {
     const [minutes, setMinutes] = useState(0);
     const [isRunning, setIsRunning] = useState(null);
     const [activeTask, setActiveTask] = useState()
+    const [elapsedMinutes, setElapsedMinutes] = useState(0);
+    const [allElapsedMinutes, setAllElapsedMinutes] = useState([]);
 
     const handleTimeChange = (time) => {
         const selectedTime = dayjs(time).format('mm:ss');
@@ -36,6 +38,21 @@ function TimerProvider({ children }) {
         return () => clearInterval(interval);
     }, [seconds, minutes, isRunning]);
 
+    useEffect(() => {
+        if (isRunning && seconds === 0) {
+            setElapsedMinutes((prevMinutes) => prevMinutes + 1);
+        }
+    }, [seconds, isRunning]);
+
+    useEffect(() => {
+        setAllElapsedMinutes((prevAllElapsedMinutes) => {
+            const updatedMinutes = [...prevAllElapsedMinutes];
+            updatedMinutes[activeTask] = elapsedMinutes;
+            return updatedMinutes;
+        });
+    }, [elapsedMinutes, activeTask]);
+
+
     function startTimer(activeTask) {
         if (minutes !== 0 || seconds !== 0 && activeTask === timerId) {
             setIsRunning(true);
@@ -57,7 +74,7 @@ function TimerProvider({ children }) {
     return (
         <TimerContext.Provider
             value={{
-                seconds, setSeconds, minutes, setMinutes, isRunning, setIsRunning, handleTimeChange, startTimer, stopTimer, activeTask, setActiveTask
+                seconds, setSeconds, minutes, setMinutes, isRunning, setIsRunning, handleTimeChange, startTimer, stopTimer, activeTask, setActiveTask, elapsedMinutes, setElapsedMinutes, allElapsedMinutes, setAllElapsedMinutes
             }}
         >
             {children}

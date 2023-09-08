@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-const header = () => {
+const Header = ({ openTodo, openStore }) => {
     // const backgroundImage1 = 'public/1.webp';
     // const backgroundImage2 = 'public/2.gif';
     // const [bgImg, setBgImg] = useState(backgroundImage1)
@@ -18,10 +18,16 @@ const header = () => {
     return (
         <>
             {/* className='header' onClick={() => handleChangeBg()} style={{ backgroundImage: `url(${bgImg})` }} */}
-            <div >header</div>
+            <div>
+
+                <div >header</div>
+                <button onClick={openTodo}>Open Todo</button>
+                <button onClick={openStore}>Open Store</button>
+            </div>
 
         </>
+
     )
 }
 
-export default header
+export default Header
